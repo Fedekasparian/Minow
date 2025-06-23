@@ -8,7 +8,9 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    domains: ['qmcillmilduapvgvlyhf.supabase.co'],
   },
 }
 
 export default nextConfig
+

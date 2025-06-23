@@ -1,75 +1,44 @@
+'use client'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
+import { useEffect, useState } from "react"
+import Formulario from "./components/formulario"
 
-export default function HomePage() {
+
+export default function Page() {
+
   // Datos de ejemplo para clientes
-  const clientes = [
-    {
-      nombre: "TechCorp Solutions",
-      antiguedad: "3 años",
-      ingresos: "$450,000",
-      crecimiento: "+35%",
-    },
-    {
-      nombre: "Innovate Digital",
-      antiguedad: "2 años",
-      ingresos: "$320,000",
-      crecimiento: "+28%",
-    },
-    {
-      nombre: "Global Enterprises",
-      antiguedad: "4 años",
-      ingresos: "$680,000",
-      crecimiento: "+42%",
-    },
-    {
-      nombre: "StartUp Dynamics",
-      antiguedad: "1 año",
-      ingresos: "$180,000",
-      crecimiento: "+15%",
-    },
-    {
-      nombre: "Future Systems",
-      antiguedad: "2.5 años",
-      ingresos: "$520,000",
-      crecimiento: "+38%",
-    },
-  ]
+  const [clientes, setClientes] = useState<any[]>([])
 
   // Datos de empleados
-  const empleados = [
-    {
-      nombre: "Manuel Marciano",
-      rol: "CEO & Fundador",
-      descripcion:
-        "Lidera la visión estratégica de Minow y supervisa todas las operaciones. Con más de 10 años de experiencia en tecnología y negocios.",
-      imagen: "/placeholder.svg?height=150&width=150",
-    },
-    {
-      nombre: "Manuel Pisano",
-      rol: "CTO & Co-fundador",
-      descripcion:
-        "Responsable de la arquitectura tecnológica y el desarrollo de productos. Experto en sistemas escalables y innovación técnica.",
-      imagen: "/placeholder.svg?height=150&width=150",
-    },
-    {
-      nombre: "Felipe",
-      rol: "Director de Desarrollo",
-      descripcion:
-        "Lidera el equipo de desarrollo y asegura la calidad del código. Especialista en metodologías ágiles y mejores prácticas.",
-      imagen: "/placeholder.svg?height=150&width=150",
-    },
-    {
-      nombre: "Federico Kaspairan",
-      rol: "Director de Operaciones",
-      descripcion:
-        "Gestiona las operaciones diarias y optimiza los procesos internos. Enfocado en la eficiencia y el crecimiento sostenible.",
-      imagen: "/placeholder.svg?height=150&width=150",
-    },
-  ]
+  const [empleados, setEmpleados] = useState<any[]>([])
 
+  // Efecto para cargar los datos de clientes y empleados al montar el componente
+  useEffect(() => {
+    fetchClientes()
+    fetchEmpleados()
+  }, [])
+
+  // Funcion que obtiene los datos de clientes y los establece en el estado
+  const fetchClientes = async () => {
+    const res = await fetch("/api/cliente") // Reemplaza con tu API real
+    const data = await res.json()
+    setClientes(data)
+  }
+
+  // Funcion que obtiene los datos de empleados y los establece en el estado
+    const fetchEmpleados = async () => {
+    const res = await fetch("/api/empleado") // Reemplaza con tu API real
+    const data = await res.json()
+    setEmpleados(data)
+  }
+
+
+  // Renderiza la página principal con las secciones de clientes, equipos y formulario de contacto
+  // Incluye un header, una sección de bienvenida, una sección de clientes, una sección del equipo y un formulario de contacto
+  // También incluye un footer con enlaces de contacto y servicios
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       {/* Header */}
@@ -78,12 +47,46 @@ export default function HomePage() {
           <div className="flex items-center justify-between">
             <h1 className="text-3xl font-bold text-slate-800">Minow</h1>
             <nav className="hidden md:flex space-x-8">
-              <a href="#clientes" className="text-slate-600 hover:text-slate-800 transition-colors">
+              <a href="#"
+                onClick={e => {
+                  e.preventDefault();
+                  const clientes = document.getElementById("clientes");
+                if (clientes) {
+                  clientes.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+              className="text-slate-600 hover:text-slate-800 transition-colors transform hover:-translate-y-1 duration-300" 
+              style={{ scrollBehavior: "smooth", transition: "transform 0.3s" }}>
                 Clientes
               </a>
-              <a href="#equipo" className="text-slate-600 hover:text-slate-800 transition-colors">
+              <a href="#"
+                onClick={e => {
+                  e.preventDefault();
+                  const equipo = document.getElementById("equipo");
+                if (equipo) {
+                  equipo.scrollIntoView({ behavior: "smooth" });
+                }
+                }}
+                  className="text-slate-600 hover:text-slate-800 transition-colors transform hover:-translate-y-1 duration-300"
+                  style={{ scrollBehavior: "smooth", transition: "transform 0.3s" }}
+                >
                 Nuestro Equipo
               </a>
+              
+                <a
+                  href="#"
+                  onClick={e => {
+                  e.preventDefault();
+                  const contacto = document.getElementById("contacto");
+                  if (contacto) {
+                    contacto.scrollIntoView({ behavior: "smooth" });
+                  }
+                  }}
+                  className="text-slate-600 hover:text-slate-800 transition-colors transform hover:-translate-y-1 duration-300"
+                  style={{ scrollBehavior: "smooth", transition: "transform 0.3s" }}
+                >
+                  Contáctanos
+                </a>
             </nav>
           </div>
         </div>
@@ -125,14 +128,14 @@ export default function HomePage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {clientes.map((cliente, index) => (
+                  {clientes.map((clientes, index) => (
                     <TableRow key={index} className="hover:bg-slate-50">
-                      <TableCell className="font-medium">{cliente.nombre}</TableCell>
-                      <TableCell>{cliente.antiguedad}</TableCell>
-                      <TableCell className="font-semibold text-green-600">{cliente.ingresos}</TableCell>
+                      <TableCell className="font-medium">{clientes.nombre}</TableCell>
+                      <TableCell>{clientes.antiguedad}</TableCell>
+                      <TableCell className="font-semibold text-green-600">{clientes.ingresos}</TableCell>
                       <TableCell>
                         <Badge variant="secondary" className="bg-green-100 text-green-800">
-                          {cliente.crecimiento}
+                          {clientes.crecimiento}
                         </Badge>
                       </TableCell>
                     </TableRow>
@@ -153,29 +156,33 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
-            {empleados.map((empleado, index) => (
+            {empleados.map((empleados, index) => (
               <Card key={index} className="text-center hover:shadow-lg transition-shadow">
                 <CardContent className="pt-6">
                   <div className="mb-4">
-                    <Image
-                      src={empleado.imagen || "/placeholder.svg"}
-                      alt={empleado.nombre}
+                    <img
+                      
+                      key={empleados.id}
+                      src={empleados.foto || "/placeholder.svg"}
+                      alt={empleados.nombre}
                       width={150}
                       height={150}
                       className="rounded-full mx-auto border-4 border-slate-200"
                     />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-2">{empleado.nombre}</h3>
+                  <h3 className="text-xl font-bold text-slate-800 mb-2">{empleados.nombre}</h3>
                   <Badge variant="outline" className="mb-4">
-                    {empleado.rol}
+                    {empleados.rol}
                   </Badge>
-                  <p className="text-slate-600 text-sm leading-relaxed">{empleado.descripcion}</p>
+                  <p className="text-slate-600 text-sm leading-relaxed">{empleados.descripcion}</p>
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
       </section>
+
+      <Formulario />
 
       {/* Footer */}
       <footer className="bg-slate-800 text-white py-12">
