@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import Formulario from "./components/formulario"
+import {Formulario} from "../app/components/formulario"
 
 
 export default function Page() {
