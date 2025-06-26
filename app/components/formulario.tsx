@@ -9,8 +9,13 @@ import { Label } from "@/components/ui/label"
 import { submitContactForm } from "../action/contact"
 import { Mail, Phone, MapPin } from "lucide-react"
 
+
+ 
 export function Formulario() {
-  const [state, action, isPending] = useActionState(submitContactForm, null)
+
+  const[state,action, isPending] = useActionState(submitContactForm, null)
+
+
 
   return (
     <section id="contacto" className="py-16 bg-white">

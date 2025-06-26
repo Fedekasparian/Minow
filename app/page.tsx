@@ -185,11 +185,8 @@ export default function page() {
 
 
 
-
-
-
-
-
+      {/* Formulario de Contacto */}
+      <Formulario />
 
       {/* Footer */}
       <footer className="bg-slate-800 text-white py-12">
