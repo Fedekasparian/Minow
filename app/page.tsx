@@ -4,10 +4,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import {Formulario} from "../app/components/formulario"
+import {Formulario} from "./components/formulario"
 
 
-export default function Page() {
+export default function page() {
 
   // Datos de ejemplo para clientes
   const [clientes, setClientes] = useState<any[]>([])
@@ -57,7 +57,7 @@ export default function Page() {
               }}
               className="text-slate-600 hover:text-slate-800 transition-colors transform hover:-translate-y-1 duration-300" 
               style={{ scrollBehavior: "smooth", transition: "transform 0.3s" }}>
-                Clientes
+                Maru y marcuss
               </a>
               <a href="#"
                 onClick={e => {
@@ -182,7 +182,14 @@ export default function Page() {
         </div>
       </section>
 
-      <Formulario />
+
+
+
+
+
+
+
+
 
       {/* Footer */}
       <footer className="bg-slate-800 text-white py-12">
